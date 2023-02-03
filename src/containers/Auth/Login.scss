@@ -1,0 +1,45 @@
+// body i {
+//     font-family: 'FontAwesome' !important;
+// }
+
+.login-background {
+    height: 100vh;
+    background-color: black;
+    position: relative;
+
+    .login-container {
+        background-color: white;
+        width: 400px;
+        height: 450px;
+        position: absolute;
+        margin: 0 auto;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+
+        .login-content {
+            display: flex;
+            flex-direction: column;
+
+            .login {
+                text-align: center;
+                font-size: 40px;
+            }
+
+            .content-user-password {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+
+                .show-password {
+                    position: absolute;
+                    right: 6px;
+                    bottom: 87px;
+                    cursor: pointer;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
