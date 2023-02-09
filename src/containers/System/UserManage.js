@@ -1,24 +1,75 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import './UserManage.scss'
+import { getAllUsers } from '../../services/userService'
+
+
 class UserManage extends Component {
 
-    state = {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrUsers: []
+        }
     }
 
-    componentDidMount() {
-
+    componentDidMount = async () => {
+        let response = await getAllUsers('ALL');
+        if (response && response.errCode === 0) {
+            this.setState({
+                arrUsers: response.users
+            })
+            // }, () => {
+            //     console.log('check state user', this.state.arrUsers); callback 
+            // })
+            // console.log('check state user', this.state.arrUsers);
+        }
     }
 
+    // life cycle
+    // run component
+    //     1. run constructor -> init state
+    //     2. did Mount (set state)
+    //     3. render
 
     render() {
+        let arrUsers = this.state.arrUsers;
         return (
-            <div className="text-center">Manage users</div>
-        );
+            <div className="Users-container" >
+                <div className='title text-center'>Helo UserManage</div>
+                <div className='users-table'>
+                    <table id="customers">
+                        <tr>
+                            <th>Email</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                        </tr>
+                        {arrUsers && arrUsers.map((item, index) => {
+                            return (
+                                <tr>
+                                    <td>{item.email}</td>
+                                    <td>{item.firstName}</td>
+                                    <td>{item.lastName}</td>
+                                    <td>{item.address}</td>
+                                    <td>
+                                        <button className='btn-edit'><i className="fa-solid fa-pencil"></i></button>
+                                        <button className='btn-delete'><i className="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                        }
+                    </table>
+                </div>
+            </div>
+        )
     }
-
 }
+
+
 
 const mapStateToProps = state => {
     return {
