@@ -13,7 +13,8 @@ class Login extends Component {
         this.state = {
             userName: '',
             password: '',
-            isShowPassword: false
+            isShowPassword: false,
+            errMessage: '',
         }
     }
 
@@ -31,10 +32,31 @@ class Login extends Component {
     handleLogin = async () => {
         // console.log('username: ', this.state.userName, 'password: ', this.state.password)
         // console.log('all state: ', this.state)
+        this.setState({
+            errMessage: '', //trc moi lan login deu clear loi
+        })
         try {
-            await handleLoginApi(this.state.userName, this.state.password)
+            let data = await handleLoginApi(this.state.userName, this.state.password)
+            if (data && data.errCode !== 0) {
+                this.setState({
+                    errMessage: data.Message
+                })
+            }
+            if (data && data.errCode === 0) {
+                this.props.userLoginSuccess(data.user)
+                console.log(`login success`)
+            }
         } catch (e) {
-            console.log('error')
+            if (e.response) {
+                if (e.response.data) {
+                    this.setState({
+                        errMessage: e.response.data.Message
+                    })
+                }
+            }
+            console.log('error ', e.response)
+            // console.log('error')
+            // 
         }
     }
 
@@ -70,6 +92,7 @@ class Login extends Component {
                                         this.state.isShowPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'
                                     }></i>
                             </span>
+                            <span className="error-message">{this.state.errMessage}</span>
                             <button type='button' className='button'
                                 onClick={() => { this.handleLogin() }}>Login</button>
                             <a href='/'>Forgot your password ?</a>
@@ -95,8 +118,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        // userLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
     };
 };
 
