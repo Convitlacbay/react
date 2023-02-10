@@ -47,3 +47,23 @@
     margin-right: 3px;
     cursor: pointer;
 }
+
+.modal-user-container {
+    .modal-user-body {
+        display: flex;
+        flex-direction: column;
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            input {
+                border-radius: 3px;
+                height: 30px;
+                outline: none;
+                padding: 0px 10px;
+            }
+        }
+    }
+}

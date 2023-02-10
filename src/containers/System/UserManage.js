@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss'
 import { getAllUsers } from '../../services/userService'
+import ModalUser from './ModalUser';
 
 
 class UserManage extends Component {
@@ -10,7 +11,8 @@ class UserManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrUsers: []
+            arrUsers: [],
+            isOpenModalUser: false
         }
     }
 
@@ -27,6 +29,20 @@ class UserManage extends Component {
         }
     }
 
+    handleAddNewUser = () => {
+        this.setState({
+            isOpenModalUser: true
+        })
+        // alert('handleAddNewUser')
+    }
+
+    toggleModalUser = () => {
+        this.setState({
+            isOpenModalUser: !this.state.isOpenModalUser
+        })
+        // alert('toggleModalUser')
+    }
+
     // life cycle
     // run component
     //     1. run constructor -> init state
@@ -37,7 +53,15 @@ class UserManage extends Component {
         let arrUsers = this.state.arrUsers;
         return (
             <div className="Users-container" >
+                <ModalUser
+                    isOpen={this.state.isOpenModalUser} //con=cha
+                    toggleModalUser={this.toggleModalUser}
+                />
                 <div className='title text-center'>Helo UserManage</div>
+                <div className='mx-1'>
+                    <button className='btn btn-primary px-3'
+                        onClick={() => this.handleAddNewUser()}>Add new user</button>
+                </div>
                 <div className='users-table'>
                     <table id="customers">
                         <tr>
@@ -56,7 +80,7 @@ class UserManage extends Component {
                                     <td>{item.address}</td>
                                     <td>
                                         <a className='btn-edit'>Edit</a>
-                                        <a>|</a>
+                                        <span>|</span>
                                         <a className='btn-delete'>Delete</a>
                                     </td>
                                 </tr>
