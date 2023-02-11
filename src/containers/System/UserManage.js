@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss'
-import { getAllUsers } from '../../services/userService'
+import { getAllUsers, createNewUserService } from '../../services/userService'
 import ModalUser from './ModalUser';
 
 
@@ -17,6 +17,10 @@ class UserManage extends Component {
     }
 
     componentDidMount = async () => {
+        await this.getAllUsersFromReact()
+    }
+
+    getAllUsersFromReact = async () => {
         let response = await getAllUsers('ALL');
         if (response && response.errCode === 0) {
             this.setState({
@@ -43,6 +47,24 @@ class UserManage extends Component {
         // alert('toggleModalUser')
     }
 
+    createNewUser = async (data) => {
+        try {
+            let response = await createNewUserService(data)
+            if (response && response.errCode !== 0) {
+                alert(response.errMessage)
+            } else {
+                await this.getAllUsersFromReact()
+                this.setState({
+                    isOpenModalUser: false
+                })
+            }
+            console.log(`response created user: `, response)
+        } catch (err) {
+            console.log(err)
+        }
+        console.log(`check data: `, data)
+    }
+
     // life cycle
     // run component
     //     1. run constructor -> init state
@@ -56,6 +78,7 @@ class UserManage extends Component {
                 <ModalUser
                     isOpen={this.state.isOpenModalUser} //con=cha
                     toggleModalUser={this.toggleModalUser}
+                    createNewUser={this.createNewUser}
                 />
                 <div className='title text-center'>Helo UserManage</div>
                 <div className='mx-1'>
@@ -64,29 +87,32 @@ class UserManage extends Component {
                 </div>
                 <div className='users-table'>
                     <table id="customers">
-                        <tr>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Action</th>
-                        </tr>
-                        {arrUsers && arrUsers.map((item, index) => {
-                            return (
-                                <tr>
-                                    <td>{item.email}</td>
-                                    <td>{item.firstName}</td>
-                                    <td>{item.lastName}</td>
-                                    <td>{item.address}</td>
-                                    <td>
-                                        <a className='btn-edit'>Edit</a>
-                                        <span>|</span>
-                                        <a className='btn-delete'>Delete</a>
-                                    </td>
-                                </tr>
-                            )
-                        })
-                        }
+                        {/* an ninh */}
+                        <tbody>
+                            <tr>
+                                <th>Email</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                            {arrUsers && arrUsers.map((item, index) => {
+                                return (
+                                    <tr>
+                                        <td>{item.email}</td>
+                                        <td>{item.firstName}</td>
+                                        <td>{item.lastName}</td>
+                                        <td>{item.address}</td>
+                                        <td>
+                                            <a className='btn-edit'>Edit</a>
+                                            <span>|</span>
+                                            <a className='btn-delete'>Delete</a>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                            }
+                        </tbody>
                     </table>
                 </div>
             </div>
