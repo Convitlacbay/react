@@ -2,21 +2,36 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { emitter } from '../../utils/emitter';
 
 class ModalUser extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            email: ``,
-            password: ``,
-            firstName: ``,
-            lastName: ``,
-            Address: ``,
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            address: '',
         }
+        this.listenToEmitter()
+    }
+
+    listenToEmitter() {
+        emitter.on('EVENT_CLEAR_MODAL_DATA', () => {
+            this.setState = ({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                address: '',
+            })
+        })
     }
 
     componentDidMount() {
+
     }
 
     toggle = () => {//cong tat dong mo
