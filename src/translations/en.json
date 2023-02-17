@@ -1,4 +1,25 @@
 {
+    "homeheader": {
+        "speciality": "Medical speciality",
+        "seachdoctor": "Find a doctor by speciality",
+        "healthfacility": "health facility",
+        "selectroom": "Choose hospital room",
+        "doctor": "Doctor",
+        "selectdoctor": "Choose a good doctor",
+        "fee": "Checkup package",
+        "checkhealthy": "General health check",
+        "suport": "Suport"
+    },
+    "banner": {
+        "title1": "HEALTH FOUNDATION",
+        "title2": "COMPLETE HEALTH CARE",
+        "child1": "Specialist examination",
+        "child2": "Remote examination",
+        "child3": "General examination",
+        "child4": "Medical test",
+        "child5": "Mental Health",
+        "child6": "Dental examination"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

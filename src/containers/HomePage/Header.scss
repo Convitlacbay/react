@@ -1,0 +1,181 @@
+.home-header-container {
+    height: 60px;
+    width: 100%;
+
+    .home-header-content {
+        width: 100%;
+        height: 100%;
+        padding: 0 20px;
+        display: flex;
+
+        .left-content {
+            width: 25%;
+            border: 1px solid red;
+            display: flex;
+            align-items: center;
+
+            i.fa-solid.fa-bars {
+                color: gray;
+                font-size: 25px;
+                cursor: pointer;
+            }
+
+            .header-logo {
+                background: url(../../assets/logo.jpg) center no-repeat;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                background-size: 31%;
+                margin-left: -110px;
+
+            }
+        }
+
+        .center-content {
+            width: 50%;
+            border: 1px solid blue;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .child-content {
+                .sub-title {
+                    font-weight: 400;
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .right-content {
+            width: 25%;
+            border: 1px solid yellow;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            .support {
+                padding-right: 50px;
+                cursor: pointer;
+            }
+
+            .language-vi {
+                cursor: pointer;
+
+                &.active {
+                    color: red;
+                }
+            }
+
+            .language-en {
+                cursor: pointer;
+                margin: 0 10px;
+
+                &.active {
+                    color: blue;
+                }
+            }
+        }
+    }
+}
+
+.home-header-banner {
+    background: url(../../assets/header-background.jpg) no-repeat;
+    background-color: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1));
+    height: 1025px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    padding: 15px 0px;
+
+    .content-up {
+        border: 1px solid red;
+        height: 60%;
+
+        .title1 {
+            text-align: center;
+            font-size: 50px;
+            text-shadow: 1px 1px 1px #333;
+            margin-bottom: 15px;
+            color: blue;
+            margin-top: 200px;
+        }
+
+        .title2 {
+            color: blue;
+            text-align: center;
+            font-size: 50px;
+            text-shadow: 1px 1px 1px #333;
+            margin-bottom: 15px;
+        }
+
+        .search {
+            width: fit-content;
+            height: 63px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            border-radius: 25px;
+            background: #f7d800;
+
+            i {
+                margin: 0 5px;
+            }
+
+            input {
+                height: 30px;
+                width: 417px;
+                background: transparent;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+
+    .content-dow {
+        border: 1px solid green;
+        height: 40%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
+
+        .options {
+            text-align: center;
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+
+            .option-child {
+                border: 1px solid red;
+                margin-bottom: 52px;
+
+                .icon-child {
+                    background: white;
+                    width: 80px;
+                    height: 80px;
+                    padding: 20px;
+                    border-radius: 50%;
+                    text-align: center;
+                    margin: 0 auto;
+                }
+
+                i {
+                    color: #49bce2;
+                    font-size: 40px;
+                }
+
+                .text-child {
+                    font-size: 17px;
+                    font-weight: 500;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #49bce2;
+                    }
+                }
+            }
+        }
+    }
+}
