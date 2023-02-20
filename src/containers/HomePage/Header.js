@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import './Header.scss';
+import { LANGUAGES } from '../../utils'
+import { changeLanguageApp } from '../../store/actions'
 
 class Header extends Component {
 
+    changeLanguage = (language) => {
+        // redux events: actions
+        // alert(language)
+        this.props.changeLanguageAppRedux(language)
+    }
+
     render() {
-        console.log(this.props)
+        let language = this.props.language
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -61,8 +69,16 @@ class Header extends Component {
                                 </i> <FormattedMessage
                                     id='homeheader.suport' />
                             </div>
-                            <div className='language-vi'>VN</div>
-                            <div className='language-en'>EN</div>
+                            <div className={language === LANGUAGES.VI ?
+                                'language-vi active' : 'language-vi'}
+                            ><span
+                                onClick={() => this.changeLanguage(LANGUAGES.VI)}
+                            >VN</span></div>
+                            <div className={language === LANGUAGES.EN ?
+                                'language-en active' : 'language-en'}
+                            ><span
+                                onClick={() => this.changeLanguage(LANGUAGES.EN)}
+                            >EN</span></div>
                         </div>
                     </div>
                 </div>
@@ -145,6 +161,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppRedux: (language) =>
+            dispatch(changeLanguageApp(language))
     };
 };
 

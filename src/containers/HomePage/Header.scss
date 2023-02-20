@@ -61,18 +61,30 @@
 
             .language-vi {
                 cursor: pointer;
+                opacity: 0.2;
 
                 &.active {
+                    opacity: 1;
                     color: red;
+                }
+
+                &:hover {
+                    opacity: 1;
                 }
             }
 
             .language-en {
                 cursor: pointer;
                 margin: 0 10px;
+                opacity: 0.2;
 
                 &.active {
+                    opacity: 1;
                     color: blue;
+                }
+
+                &:hover {
+                    opacity: 1;
                 }
             }
         }
@@ -81,11 +93,10 @@
 
 .home-header-banner {
     background: url(../../assets/header-background.jpg) no-repeat;
-    background-color: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1));
     height: 1025px;
     width: 100%;
     background-position: center;
-    background-size: cover;
+    background-size: 64%;
     padding: 15px 0px;
 
     .content-up {
